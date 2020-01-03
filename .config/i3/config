@@ -1,8 +1,8 @@
 set $mod Mod4
 # set $term urxvt
 set $term termite
-set $browser firefox
-# set $browser google-chrome-stable
+# set $browser firefox
+set $browser google-chrome-stable
 # set $browser qutebrowser
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -33,21 +33,25 @@ floating_modifier $mod
 bindsym $mod+Return exec --no-startup-id $term
 
 for_window [class="matplotlib"] floating enable
+for_window [class="MATLAB R2018b - academic use"] floating enable
+for_window [class="feh"] floating enable
+for_window [class="mpv"] floating enable
 
 for_window [class="floating"] floating enable
 for_window [class="floating"] sticky enable
 for_window [instance="floating"] floating enable
 for_window [instance="floating"] sticky enable
+
 bindsym $mod+Shift+Return exec --no-startup-id $term --class="floating"
 # bindsym $mod+Shift+Return exec --no-startup-id $term -name fl
 
 
-# for_window [instance="dropdown"] floating enable
-# for_window [instance="dropdown"] resize set 625 400
-# for_window [instance="dropdown"] move position center
-# for_window [instance="dropdown"] move scratchpad
-# for_window [instance="dropdown"] sticky enable
-# exec_always --no-startup-id $term -name dropdown -e ranger
+for_window [instance="dropdown"] floating enable
+for_window [instance="dropdown"] resize set 625 400
+for_window [instance="dropdown"] move position center
+for_window [instance="dropdown"] move scratchpad
+for_window [instance="dropdown"] sticky enable
+exec_always --no-startup-id termite --name=dropdown 
 # exec_always --no-startup-id exec $scriptdir/maybeterm dropdown "-e ranger"
 
 # for_window [instance="run"] floating enable
@@ -77,19 +81,21 @@ bindsym $mod+w			layout tabbed
 bindsym $mod+e			layout toggle split
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-#bindsym $mod+r			
+bindsym $mod+r			resize set height 400 px; resize set width 800 px
 bindsym $mod+Shift+r restart
 
 bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set $inner; gaps outer current set $outer
 
-bindsym $mod+y			exec --no-startup-id $scriptdir/yt
+bindsym $mod+y			exec --no-startup-id $scriptdir/stream_clipboard_link
 bindsym $mod+Shift+y		resize shrink width 10 px or 10ppt
 
 bindsym $mod+u			exec --no-startup-id dmenuunicode
 bindsym $mod+Shift+u		resize shrink height 10 px or 10ppt
 
+# bindsym $mod+i			exec --no-startup-id firefox --private-window
 bindsym $mod+i			exec --no-startup-id google-chrome-stable --incognito
+
 bindsym $mod+Shift+i		resize grow height 10 px or 10ppt
 
 bindsym $mod+o			sticky toggle
@@ -98,8 +104,8 @@ bindsym $mod+Shift+o		resize grow width 10 px or 10ppt
 bindsym $mod+p          exec --no-startup-id passmenu
 #bindsym $mod+Shift+p		
 
-bindsym $mod+Shift+a			[instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
-bindsym $mod+a		        [instance="run"] scratchpad show; [instance="run"] move position center
+bindsym $mod+a			[instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
+bindsym $mod+Shift+a		        [instance="run"] scratchpad show; [instance="run"] move position center
 
 bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
@@ -141,7 +147,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+b			exec --no-startup-id $browser
 #bindsym $mod+Shift+b		
 
-bindsym $mod+n			exec --no-startup-id $scriptdir/netflix
+bindsym $mod+n			exec --no-startup-id $scriptdir/next_free_workspace
 bindsym $mod+Shift+n		resize set 625 400
 
 bindsym $mod+m			exec $scriptdir/lock

@@ -1,6 +1,6 @@
-
 [bar/top]
-monitor = eDP1
+; TODO FIX this issue
+monitor = ${env:MONITOR:}
 width = 100%
 height = 20
 
